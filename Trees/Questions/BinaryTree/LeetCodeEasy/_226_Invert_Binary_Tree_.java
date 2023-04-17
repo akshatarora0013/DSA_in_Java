@@ -1,6 +1,4 @@
-package Trees.Questions.LeetCodeEasy;
-
-import java.util.*;
+package Trees.Questions.BinaryTree.LeetCodeEasy;
 
 //  https://leetcode.com/problems/invert-binary-tree/description/
 

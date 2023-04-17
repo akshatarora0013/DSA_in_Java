@@ -1,6 +1,4 @@
-package Trees.Questions.LeetCodeEasy;
-
-import java.util.*;
+package Trees.Questions.BinaryTree.LeetCodeEasy;
 
 //  https://leetcode.com/problems/diameter-of-binary-tree/description/
 

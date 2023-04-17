@@ -1,4 +1,4 @@
-package Trees.Questions.LeetCodeMedium;
+package Trees.Questions.BinaryTree.LeetCodeMedium;
 
 import java.util.*;
 

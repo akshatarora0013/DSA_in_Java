@@ -1,10 +1,10 @@
-package Trees.Questions.LeetCodeMedium;
+package Trees.Questions.BinaryTree.LeetCodeMedium;
 
 import java.util.*;
 
-//  https://leetcode.com/problems/binary-tree-level-order-traversal/description/
+//   https://leetcode.com/problems/binary-tree-right-side-view/
 
-public class _102_Binary_Tree_Level_Order_Treaversal_ {
+public class _199_Binary_Tree_right_side_view {
     public class TreeNode {
         int val;
         TreeNode left;
@@ -19,6 +19,15 @@ public class _102_Binary_Tree_Level_Order_Treaversal_ {
     }
 
     class Solution {
+        public List<Integer> rightSideView(TreeNode root) {
+            List<Integer> ans = new ArrayList<>();
+            List<List<Integer>> list = levelOrder(root);
+            for(int i = 0; i < list.size(); i++){
+                List<Integer> temp = list.get(i);
+                ans.add(temp.get(temp.size()-1));
+            }
+            return ans;
+        }
         public List<List<Integer>> levelOrder(TreeNode root) {
             Queue<TreeNode> q = new LinkedList<>();
             List<List<Integer>> finalAns = new ArrayList<List<Integer>>();

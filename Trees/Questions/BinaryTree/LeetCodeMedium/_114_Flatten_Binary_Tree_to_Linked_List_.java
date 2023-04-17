@@ -1,6 +1,4 @@
-package Trees.Questions.LeetCodeMedium;
-
-import java.util.*;
+package Trees.Questions.BinaryTree.LeetCodeMedium;
 
 //   https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
 

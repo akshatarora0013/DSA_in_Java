@@ -1,4 +1,4 @@
-package Trees.Questions.LeetCodeEasy;
+package Trees.Questions.BinaryTree.LeetCodeEasy;
 
 public class _100_Same_Tree_ {
     public class TreeNode {

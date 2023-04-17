@@ -1,4 +1,4 @@
-package Trees.Questions.LeetCodeEasy;
+package Trees.Questions.BinaryTree.LeetCodeEasy;
 
 //  https://leetcode.com/problems/subtree-of-another-tree/description/
 

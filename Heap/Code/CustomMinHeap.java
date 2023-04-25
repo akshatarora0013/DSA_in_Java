@@ -4,9 +4,11 @@ import java.util.*;
 
 public class CustomMinHeap<T extends Comparable<T>> {
     private ArrayList<T> data = new ArrayList<>();
+    HashMap<T, Integer> map = new HashMap<>();
 
     public void add(T element){
         data.add(element);
+        map.put(element, data.size()-1);
         upheaify(data.size()-1);
     }
 
@@ -23,6 +25,8 @@ public class CustomMinHeap<T extends Comparable<T>> {
         T jth = data.get(j);
         data.set(i, jth);
         data.set(j, ith);
+        map.put(ith, j);
+        map.put(jth, i);
     }
 
     public void display(){
@@ -41,6 +45,7 @@ public class CustomMinHeap<T extends Comparable<T>> {
         swap(0, data.size()-1);
         T remove = this.data.remove(data.size()-1);
         downHeapify(0);
+        map.remove(remove);
         return remove;
     }
 
@@ -67,5 +72,10 @@ public class CustomMinHeap<T extends Comparable<T>> {
 
     public int isLarger(T t, T o){
         return t.compareTo(o);
+    }
+
+    public void updatePriority(T pair){
+        int index = map.get(pair);
+        upheaify(index);
     }
 }

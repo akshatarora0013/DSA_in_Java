@@ -2,25 +2,25 @@ package Heap.Code;
 
 import java.util.*;
 
-public class CustomMinHeap {
-    private ArrayList<Integer> data = new ArrayList<>();
+public class CustomMinHeap<T extends Comparable<T>> {
+    private ArrayList<T> data = new ArrayList<>();
 
-    public void add(int element){
+    public void add(T element){
         data.add(element);
         upheaify(data.size()-1);
     }
 
     private void upheaify(int childIndex){
         int parentIndex = (childIndex-1)/2;
-        if(data.get(childIndex) < data.get(parentIndex)){
+        if(isLarger(data.get(childIndex), data.get(parentIndex)) > 0){
             swap(childIndex,parentIndex);
             upheaify(parentIndex);
         }
     }
 
     private void swap(int i, int j){
-        int ith = data.get(i);
-        int jth = data.get(j);
+        T ith = data.get(i);
+        T jth = data.get(j);
         data.set(i, jth);
         data.set(j, ith);
     }
@@ -37,9 +37,9 @@ public class CustomMinHeap {
         return this.size() == 0;
     }
 
-    public int remove(){
+    public T remove(){
         swap(0, data.size()-1);
-        int remove = this.data.remove(data.size()-1);
+        T remove = this.data.remove(data.size()-1);
         downHeapify(0);
         return remove;
     }
@@ -49,10 +49,10 @@ public class CustomMinHeap {
         int rightChildIndex = 2 * parentIndex + 2;
 
         int minIndex = parentIndex;
-        if(leftChildIndex < this.data.size() && data.get(minIndex) > data.get(leftChildIndex)){
+        if(leftChildIndex < this.data.size() && isLarger(data.get(leftChildIndex) , data.get(minIndex)) > 0){
             minIndex = leftChildIndex;
         }
-        if(rightChildIndex < this.data.size() && data.get(minIndex) > data.get(rightChildIndex)){
+        if(rightChildIndex < this.data.size() && isLarger(data.get(rightChildIndex) , data.get(minIndex)) > 0){
             minIndex = rightChildIndex;
         }
         if(parentIndex != minIndex){
@@ -61,7 +61,11 @@ public class CustomMinHeap {
         }
     }
 
-    public int get(){
+    public T get(){
         return this.data.get(0);
+    }
+
+    public int isLarger(T t, T o){
+        return t.compareTo(o);
     }
 }

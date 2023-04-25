@@ -405,4 +405,109 @@ public class Graph {
 
         return mst;
     }
+
+    private class DijkstraPair implements Comparable<DijkstraPair>{
+        String vName;
+        String pathSoFar;
+        int cost;
+
+        @Override
+        public int compareTo(DijkstraPair o){
+            return o.cost - this.cost;
+        }
+    }
+
+    public HashMap<String, Integer> dijkstraAlgo(String src){
+        HashMap<String, Integer> ans = new HashMap<>();
+        HashMap<String, DijkstraPair> map = new HashMap<>();
+
+        CustomMinHeap<DijkstraPair> heap = new CustomMinHeap<>();
+
+        for(String key: vertices.keySet()){
+            DijkstraPair pair = new DijkstraPair();
+            pair.vName = key;
+            pair.pathSoFar = "";
+            pair.cost = Integer.MAX_VALUE;
+
+            if(key.equals(src)){
+                pair.cost = 0;
+                pair.pathSoFar = src;
+            }
+            map.put(key, pair);
+            heap.add(pair);
+        }
+
+        while (!heap.isEmpty()){
+            DijkstraPair rp = heap.remove();
+            map.remove(rp.vName);
+
+            ans.put(rp.vName, rp.cost);
+
+            for(String nbr: vertices.get(rp.vName).neighbours.keySet()){
+                if(map.containsKey(nbr)){
+                    int oc = map.get(nbr).cost;
+                    int nc = rp.cost + vertices.get(rp.vName).neighbours.get(nbr);
+                    if(nc < oc){
+                        DijkstraPair p = map.get(nbr);
+                        p.pathSoFar = rp.pathSoFar + rp.vName;
+                        p.cost = nc;
+                        heap.updatePriority(p);
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    private class EdgePair{
+        String v1;
+        String v2;
+        int cost;
+    }
+
+    public ArrayList<EdgePair> getAllEdges(){
+        ArrayList<EdgePair> edges = new ArrayList<>();
+        for(String vtx : vertices.keySet()){
+            Vertex v = vertices.get(vtx);
+            for (String nbr : v.neighbours.keySet()){
+                EdgePair pair = new EdgePair();
+                pair.v1 = vtx;
+                pair.v2 = nbr;
+                pair.cost = v.neighbours.get(nbr);
+                edges.add(pair);
+            }
+        }
+        return edges;
+    }
+
+    public HashMap<String, Integer> bellmanFord(String src) throws Exception {
+        ArrayList<EdgePair> edges = getAllEdges();
+        HashMap<String, Integer> ans = new HashMap<>();
+        for (String key : vertices.keySet()){
+            ans.put(key, 100000);
+            if(key.equals(src)){
+                ans.put(key, 0);
+            }
+        }
+
+        int totalVertex = vertices.size();
+        for (int i = 1; i <= totalVertex; i++){
+            for (EdgePair edge: edges){
+                int oc = ans.get(edge.v2);
+                int nc = ans.get(edge.v1) + edge.cost;
+                if(nc < oc){
+                    if(i < totalVertex){
+                        ans.put(edge.v2, nc);
+                    }
+                    else{
+                       throw new Exception("-ve Cycle present");
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
 }

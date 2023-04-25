@@ -56,7 +56,9 @@ public class GraphMain {
 
 //        System.out.println(graph.connectedComponents());
 
-        graph.prismsAlgo().display();
+//        graph.prismsAlgo().display();
+//        System.out.println(graph.dijkstraAlgo("A"));
 
+//        System.out.println(graph.bellmanFord("A"));
     }
 }
